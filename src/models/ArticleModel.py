@@ -51,3 +51,25 @@ class ArticleModel:
             raise Exception(ex)
         finally:
             connection.close()
+
+    @classmethod
+    def add_article(self, request):
+
+        connection = None
+
+        try:
+            connection = get_connection()
+
+            with connection.cursor() as cursor:
+                query = """INSERT INTO articulo
+                                (codigo, descripcion, precio, costo, is_active)
+                            VALUES
+                                (%(codigo)s, %(descripcion)s, %(precio)s, %(costo)s, %(is_active)s)"""
+                cursor.execute(query, request)
+                affected_rows = cursor.rowcount
+                connection.commit()
+            return affected_rows
+        except Exception as ex:
+            raise Exception(ex)
+        finally:
+            connection.close()

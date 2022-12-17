@@ -1,15 +1,17 @@
 class Invoice:
 
-    def __init__(self, id, codigo, fecha, id_cliente):
+    def __init__(self, id, codigo, fecha, cliente, total):
         self.id = id
         self.codigo = codigo
         self.fecha = fecha
-        self.id_cliente = id_cliente
+        self.cliente = cliente
+        self.total = total
 
     def to_JSON(self):
         return {
             'id': self.id,
             'codigo': self.codigo,
             'fecha': self.fecha,
-            'id_cliente': self.id_cliente
+            'cliente': self.cliente,
+            'total': self.total
         }

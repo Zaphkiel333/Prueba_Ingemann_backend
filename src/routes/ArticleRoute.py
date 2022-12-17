@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 from src.models.ArticleModel import ArticleModel
 
@@ -22,5 +22,25 @@ def get_article(codigo):
             return article
         else:
             return {}, 404
+    except Exception as ex:
+        return {'error': str(ex)}, 500
+
+
+@main.route('/add', methods=['POST'])
+def add_article():
+    try:
+        codigo = request.json['codigo']
+        descripcion = request.json['descripcion']
+        precio = request.json['precio']
+        is_active = request.json['is_active']
+
+        cost = ((precio * 15) / 100) * precio
+        request.json['costo'] = cost
+
+        affected_rows = ArticleModel.add_article(request.json)
+        if affected_rows > 0:
+            return {"Inserted": request.json['codigo']}, 200
+
+        return {'error': 'no rows affected'}, 400
     except Exception as ex:
         return {'error': str(ex)}, 500

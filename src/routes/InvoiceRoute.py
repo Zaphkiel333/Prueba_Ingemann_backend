@@ -12,3 +12,12 @@ def get_invoices():
         return invoices
     except Exception as ex:
         return {'error': str(ex)}, 500
+
+
+@main.route('/<codigo>')
+def get_invoices_filtered(codigo):
+    try:
+        invoices = InvoiceModel.get_invoices_filtered(codigo)
+        return invoices
+    except Exception as ex:
+        return {'error': str(ex)}, 500
