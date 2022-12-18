@@ -29,17 +29,9 @@ def get_article(codigo):
 @main.route('/add', methods=['POST'])
 def add_article():
     try:
-        codigo = request.json['codigo']
-        descripcion = request.json['descripcion']
-        precio = request.json['precio']
-        is_active = request.json['is_active']
-
-        cost = ((precio * 15) / 100) * precio
-        request.json['costo'] = cost
-
         affected_rows = ArticleModel.add_article(request.json)
         if affected_rows > 0:
-            return {"Inserted": request.json['codigo']}, 200
+            return {"Inserted": affected_rows}, 200
 
         return {'error': 'no rows affected'}, 400
     except Exception as ex:

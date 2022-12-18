@@ -60,15 +60,30 @@ class ArticleModel:
         try:
             connection = get_connection()
 
+            articles = request.get('articles')
+
             with connection.cursor() as cursor:
-                query = """INSERT INTO articulo
-                                (codigo, descripcion, precio, costo, is_active)
+                query = """INSERT INTO factura
+                                (codigo, id_cliente, fecha)
                             VALUES
-                                (%(codigo)s, %(descripcion)s, %(precio)s, %(costo)s, %(is_active)s)"""
+                                (%(codigo)s, %(cliente)s, %(fecha)s)
+                            RETURNING id"""
                 cursor.execute(query, request)
-                affected_rows = cursor.rowcount
+                id_factura = cursor.fetchone()[0]
+
+                query = """ INSERT INTO detalle_factura
+                                (id_factura, id_articulo, cantidad)
+                            VALUES"""
+                for i in range(0, len(articles)):
+                    article = articles[i]
+                    query += f"({id_factura}, {article.get('id_articulo')}, {article.get('cantidad')}),"
+
+                cursor.execute(query[:-1])
+                row_affected = cursor.rowcount
+
                 connection.commit()
-            return affected_rows
+
+            return row_affected
         except Exception as ex:
             raise Exception(ex)
         finally:

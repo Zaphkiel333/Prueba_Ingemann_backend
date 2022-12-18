@@ -11,7 +11,7 @@ class Invoice:
         return {
             'id': self.id,
             'codigo': self.codigo,
-            'fecha': self.fecha,
+            'fecha': self.fecha.strftime('%d/%m/%Y'),
             'cliente': self.cliente,
             'total': self.total
         }

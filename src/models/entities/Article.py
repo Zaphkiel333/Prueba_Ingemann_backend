@@ -13,6 +13,7 @@ class Article:
             'id': self.id,
             'codigo': self.codigo,
             'descripcion': self.descripcion,
+            'precio':self.precio,
             'costo': self.costo,
             'is_active': self.is_active
         }
