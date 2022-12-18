@@ -17,7 +17,7 @@ def set_routes():
     app.register_blueprint(ArticleRoute.main, url_prefix='/api/articles')
     app.register_blueprint(InvoiceRoute.main, url_prefix='/api/invoices')
     app.register_blueprint(UserRoute.main, url_prefix='/api/users')
-    app.register_blueprint(InvoiceDetailRoute.main, url_prefix='/api/invoices_details')
+    app.register_blueprint(InvoiceDetailRoute.main, url_prefix='/api/invoice_details')
 
 
 if __name__ == '__main__':
@@ -26,4 +26,4 @@ if __name__ == '__main__':
     set_routes()
 
     app.register_error_handler(404, page_not_found)
-    app.run()
+    app.run(host="0.0.0.0")
