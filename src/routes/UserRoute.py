@@ -9,6 +9,6 @@ main = Blueprint('user_blueprint', __name__)
 def get_users():
     try:
         users = UserModel.get_users()
-        return users
+        return users, 200
     except Exception as ex:
         return {'error': str(ex)}, 500

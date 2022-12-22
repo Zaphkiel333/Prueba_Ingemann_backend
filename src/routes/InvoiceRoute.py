@@ -9,7 +9,7 @@ main = Blueprint('invoice_blueprint', __name__)
 def get_invoices():
     try:
         invoices = InvoiceModel.get_invoices()
-        return invoices
+        return invoices, 200
     except Exception as ex:
         return {'error': str(ex)}, 500
 

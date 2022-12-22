@@ -9,7 +9,7 @@ main = Blueprint('article_blueprint', __name__)
 def get_articles():
     try:
         articles = ArticleModel.get_articles()
-        return articles
+        return articles, 200
     except Exception as ex:
         return {'error': str(ex)}, 500
 
@@ -22,17 +22,5 @@ def get_article(codigo):
             return article
         else:
             return {}, 404
-    except Exception as ex:
-        return {'error': str(ex)}, 500
-
-
-@main.route('/add', methods=['POST'])
-def add_article():
-    try:
-        affected_rows = ArticleModel.add_article(request.json)
-        if affected_rows > 0:
-            return {"Inserted": affected_rows}, 200
-
-        return {'error': 'no rows affected'}, 400
     except Exception as ex:
         return {'error': str(ex)}, 500
