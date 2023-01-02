@@ -14,7 +14,7 @@ def get_invoice_details(id_factura):
         return {'error': str(ex)}, 500
 
 
-@main.route('/', methods=['POST'])
+@main.route('/add', methods=['POST'])
 def add_invoice_detail():
     try:
         affected_rows = InvoiceDetailModel.add_invoice_detail(request.json)
@@ -23,4 +23,4 @@ def add_invoice_detail():
 
         return {'error': 'no rows affected'}, 400
     except Exception as ex:
-        return {'error': str(ex)}, 500
+         return {'error': str(ex)}, 500

@@ -1,9 +1,9 @@
 class InvoiceDetail:
 
-    def __init__(self, codigo, descripcion, costo, cantidad, id_factura):
+    def __init__(self, codigo, descripcion, precio, cantidad, id_factura):
         self.codigo = codigo
         self.descripcion = descripcion
-        self.costo = costo
+        self.precio = precio
         self.cantidad = cantidad
         self.id_factura = id_factura
 
@@ -11,7 +11,7 @@ class InvoiceDetail:
         return {
             'codigo': self.codigo,
             'descripcion': self.descripcion,
-            'costo': self.costo,
+            'precio': self.precio,
             'cantidad': self.cantidad,
             'id_factura': self.id_factura
         }
